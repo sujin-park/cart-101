@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import GlobalStyle from './styles/GlobalStyle'
+import Theme from './styles/Theme'
 
-export default App;
+import PageTemplate from './components/PageTemplate'
+import ProductsPage from './pages/ProductsPage'
+import CartPage from './pages/CartPage'
+
+interface AppProps {}
+
+const App: React.FC<AppProps> = () => (
+    <ThemeProvider theme={Theme}>
+      <BrowserRouter>
+        <PageTemplate>
+            <Switch>
+              <Route path="/products" component={ProductsPage} exact/>
+              <Route path="/cart" component={CartPage} />
+            </Switch>
+          <GlobalStyle />
+        </PageTemplate>
+      </BrowserRouter>
+    </ThemeProvider>
+)
+
+export default App
