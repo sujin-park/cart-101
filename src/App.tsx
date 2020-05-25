@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
 import Theme from './styles/Theme'
 
-import PageTemplate from './components/PageTemplate'
+import PageTemplate from './components/common/PageTemplate'
 import ProductsPage from './pages/ProductsPage'
 import CartPage from './pages/CartPage'
 

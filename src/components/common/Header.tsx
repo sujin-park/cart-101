@@ -19,6 +19,7 @@ const InnerContainer = styled.div`
   align-items: center;
   width: ${({ theme }) => theme.maxWidth};
   height: 100%;
+  padding: 0 16px;
   margin: 0 auto;
 `
 
@@ -38,10 +39,10 @@ const Header: React.FC = () => {
         <InnerContainer>
           <img
               src="https://class101.net/images/class101-main-logo.svg"
-              width={100}
+              width={ 100 }
               alt=""
           />
-          <Menu to="/cart">장바구니로 가기</Menu>
+          <Menu to="/cart">장바구니</Menu>
         </InnerContainer>
       </Container>
   )
