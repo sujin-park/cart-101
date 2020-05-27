@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ProductScore from './ProductScore'
 import ProductCart from './ProductCart'
 
-interface ProductCardProps {
+export interface ProductCardProps {
   title: string
   price: number
   coverImage?: string
