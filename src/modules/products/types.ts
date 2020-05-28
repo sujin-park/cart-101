@@ -17,4 +17,5 @@ export type ProductsState = {
   items: Product[]
   size: number
   page: number
+  hasNext: boolean
 }

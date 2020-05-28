@@ -6,15 +6,17 @@ new Server({
     this.urlPrefix = 'https://api-class101.com'
 
     this.get('/products', (schema, request)  => {
-      let size: number = Number(request.queryParams.size)
-      let page: number = Number(request.queryParams.page)
+      const size = Number(request.queryParams.size)
+      const page = Number(request.queryParams.page)
+      const startIdx = page * size
+      const lastIdx = size * (page + 1)
 
-      const currentItems = productItems.slice(page * size, size * (page + 1) - 1)
+      const currentItems = productItems.slice(startIdx, lastIdx)
 
       return {
         items: currentItems,
         currentPage: page,
-        hasNext: currentItems.length >= size
+        hasNext: productItems.length > lastIdx
       }
     })
 

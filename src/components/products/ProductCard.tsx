@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 
 import ProductScore from './ProductScore'
 import ProductCart from './ProductCart'
 
 export interface ProductCardProps {
+  ref: React.Ref<HTMLDivElement>
   title: string
   price: number
   coverImage?: string
@@ -47,8 +48,8 @@ const Price = styled.div`
 
 const filterCurrencyWon = (value: number) => value ?`${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : 0
 
-const ProductCard: React.FC<ProductCardProps> = ({ title, price, coverImage = 'https://cdn.class101.net/images/3a25ecd9-d1ab-4d21-8cc1-522ea711e729', score, isAddedCart = false, addToCart }) => (
-    <Container>
+const ProductCard: React.FC<ProductCardProps> = forwardRef(({ title, price, coverImage = 'https://cdn.class101.net/images/3a25ecd9-d1ab-4d21-8cc1-522ea711e729', score, isAddedCart = false, addToCart }, ref) => (
+    <Container ref={ref}>
       <ImageContainer>
         <Image src={coverImage} alt="상품 사진" />
       </ImageContainer>
@@ -57,6 +58,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ title, price, coverImage = 'h
       <ProductScore score={score}/>
       <ProductCart isAddedCart={isAddedCart} addToCart={addToCart}/>
     </Container>
-)
+))
 
 export default ProductCard
