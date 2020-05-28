@@ -13,4 +13,8 @@ export type Product = {
   isAddedCart?: boolean
 };
 
-export type ProductsState = Product[]
+export type ProductsState = {
+  items: Product[]
+  size: number
+  page: number
+}

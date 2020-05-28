@@ -10,6 +10,7 @@ export interface ProductCardProps {
   coverImage?: string
   score: number
   isAddedCart?: boolean
+  addToCart: (e: React.MouseEvent<HTMLElement>) => void
 }
 
 const Container = styled.div`
@@ -44,15 +45,17 @@ const Price = styled.div`
   margin-bottom: 8px;
 `
 
-const ProductCard: React.FC<ProductCardProps> = ({ title, price, coverImage = 'https://cdn.class101.net/images/3a25ecd9-d1ab-4d21-8cc1-522ea711e729', score, isAddedCart = false }) => (
+const filterCurrencyWon = (value: number) => value ?`${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : 0
+
+const ProductCard: React.FC<ProductCardProps> = ({ title, price, coverImage = 'https://cdn.class101.net/images/3a25ecd9-d1ab-4d21-8cc1-522ea711e729', score, isAddedCart = false, addToCart }) => (
     <Container>
       <ImageContainer>
         <Image src={coverImage} alt="상품 사진" />
       </ImageContainer>
       <Title>{ title }</Title>
-      <Price>{ price }</Price>
+      <Price>{ filterCurrencyWon(price) }원</Price>
       <ProductScore score={score}/>
-      <ProductCart isAddedCart={isAddedCart}/>
+      <ProductCart isAddedCart={isAddedCart} addToCart={addToCart}/>
     </Container>
 )
 
