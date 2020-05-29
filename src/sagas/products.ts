@@ -1,7 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios'
-import { FETCH_PRODUCTS, setCurrentPage, setNext } from '../modules/products'
-import { setProducts } from '../modules/products'
+import { FETCH_PRODUCTS, setCurrentPage, setNext, setProducts } from '../modules/products'
 
 const fetchProducts = function* ({ payload: { size, page } }: any) {
   try {
