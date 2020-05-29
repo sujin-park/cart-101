@@ -6,12 +6,13 @@ import ProductCart from './ProductCart'
 
 export interface ProductCardProps {
   ref: React.Ref<HTMLDivElement>
+  id: string
   title: string
   price: number
   coverImage?: string
   score: number
   isAddedCart?: boolean
-  addToCart: (e: React.MouseEvent<HTMLElement>) => void
+  addToCart: (id: string) => void
 }
 
 const Container = styled.div`
@@ -48,7 +49,7 @@ const Price = styled.div`
 
 const filterCurrencyWon = (value: number) => value ?`${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : 0
 
-const ProductCard: React.FC<ProductCardProps> = forwardRef(({ title, price, coverImage = 'https://cdn.class101.net/images/3a25ecd9-d1ab-4d21-8cc1-522ea711e729', score, isAddedCart = false, addToCart }, ref) => (
+const ProductCard: React.FC<ProductCardProps> = forwardRef(({ id, title, price, coverImage = '', score, isAddedCart = false, addToCart }, ref) => (
     <Container ref={ref}>
       <ImageContainer>
         <Image src={coverImage} alt="상품 사진" />
@@ -56,7 +57,7 @@ const ProductCard: React.FC<ProductCardProps> = forwardRef(({ title, price, cove
       <Title>{ title }</Title>
       <Price>{ filterCurrencyWon(price) }원</Price>
       <ProductScore score={score}/>
-      <ProductCart isAddedCart={isAddedCart} addToCart={addToCart}/>
+      <ProductCart id={id} isAddedCart={isAddedCart} addToCart={addToCart}/>
     </Container>
 ))
 

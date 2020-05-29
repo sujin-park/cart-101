@@ -15,10 +15,10 @@ const App: React.FC<AppProps> = () => (
     <ThemeProvider theme={Theme}>
       <BrowserRouter>
         <PageTemplate>
-            <Switch>
-              <Route path="/products" component={ProductsPage} exact/>
-              <Route path="/cart" component={CartPage} />
-            </Switch>
+          <Switch>
+            <Route path="/products" component={ProductsPage} exact/>
+            <Route path="/cart" component={CartPage} />
+          </Switch>
           <GlobalStyle />
         </PageTemplate>
       </BrowserRouter>

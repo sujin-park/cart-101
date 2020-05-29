@@ -37,11 +37,13 @@ const Header: React.FC = () => {
   return (
       <Container>
         <InnerContainer>
-          <img
-              src="https://class101.net/images/class101-main-logo.svg"
-              width={ 100 }
-              alt=""
-          />
+          <Link to="/products">
+            <img
+                src="https://class101.net/images/class101-main-logo.svg"
+                width={ 100 }
+                alt=""
+            />
+          </Link>
           <Menu to="/cart">장바구니</Menu>
         </InnerContainer>
       </Container>

@@ -11,7 +11,7 @@ new Server({
       const startIdx = page * size
       const lastIdx = size * (page + 1)
 
-      const currentItems = productItems.slice(startIdx, lastIdx)
+      const currentItems = productItems.sort((pre, next) => next.score - pre.score).slice(startIdx, lastIdx)
 
       return {
         items: currentItems,

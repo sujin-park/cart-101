@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../modules'
 
 import PageTitle from '../components/common/PageTitle'
 import ProductCard from '../components/products/ProductCard'
 import ProductCardList from '../components/products/ProductCardList'
 
 import IntersectionObserver from '../lib/io'
-import { RootState } from '../modules'
-import { FETCH_PRODUCTS, SET_CURRENT_PAGE } from '../modules/products'
+import { fetchProducts, setCurrentPage, setToggleCart, Product } from '../modules/products'
+import { addToCart, removeCart } from '../modules/cart'
 
 const SIZE = 5
 
@@ -18,12 +19,12 @@ const ProductsPage: React.FC = () => {
 
   const io = IntersectionObserver(
     () => {
-      dispatch({ type: SET_CURRENT_PAGE, payload: page + 1 })
+      dispatch(setCurrentPage(page + 1))
     }
   )
 
   useEffect(() => {
-    dispatch({ type: FETCH_PRODUCTS, payload: { size: SIZE, page } })
+    dispatch(fetchProducts({ size: SIZE, page }))
   }, [page, dispatch])
 
   useEffect(() => {
@@ -36,23 +37,29 @@ const ProductsPage: React.FC = () => {
     }
   }, [hasNext, productRef.current])
 
-  const addToCart = () => dispatch({ type: FETCH_PRODUCTS })
+  const toggleCart = (id: string) => {
+    dispatch(setToggleCart({ id }))
+
+    const addedItem = items.find((item: Product) => item.id === id) as Product
+    addedItem && addedItem.isAddedCart ? dispatch(removeCart(id)) : dispatch(addToCart(addedItem))
+  }
 
   return (
     <>
       <PageTitle title="상품 목록"/>
-      <ProductCardList loading={true}>
+      <ProductCardList>
         {items.map(
           ({ id, title, price, coverImage, score, isAddedCart }) => (
             <ProductCard
               ref={productRef}
               key={id}
+              id={id}
               title={title}
               price={price}
               coverImage={coverImage}
               score={score}
               isAddedCart={isAddedCart}
-              addToCart={addToCart}
+              addToCart={toggleCart}
             />
           ),
         )}
